@@ -1,8 +1,5 @@
-# import time 
-import sys
-import signal
-import logging
-
+import sys, signal, logging, time
+from threading import Lock
 from concurrent.futures import ThreadPoolExecutor
 from pyModbusTCP.client import ModbusClient
 
@@ -10,14 +7,17 @@ from pyModbusTCP.client import ModbusClient
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Initialize Modbus client
-c = ModbusClient(host='10.126.254.195', port=502, unit_id=1, auto_open=True)
+client = ModbusClient(host='10.126.254.195', port=502, unit_id=1, auto_open=True)
+client_lock = Lock()
 
-# Graceful shutdown handler
+running = True
 def signal_handler(sig, frame):
+    global running
     logging.info("Terminating script...")
-    sys.exit(0)
+    running = False
 
-signal.signal(signal.SIGINT, signal_handler)
+# signal.signal(signal.SIGINT, signal_handler)
+# signal.signal(signal.SIGTERM, signal_handler)
 
 # Input: .txt file
 def load_registers_from_file(file_path):
@@ -55,26 +55,36 @@ def read_and_print_register(reg):
     name = reg[1]
     scale = reg[2]
     unit = reg[3]
-    
-    # Read the register value
-    value = c.read_input_registers(address, 1)
-    
+
+    with client_lock: 
+        if not client.is_open:
+            if not client.open():
+                logging.error("Unable to connect to Modbus server.")
+                return
+
+        value = client.read_input_registers(address, 1)
+
     if value:
         real_value = value[0] * scale
         logging.info(f'Register {address}: {name} value: {real_value} {unit}')
     else:
         logging.error(f'Unable to read register {address}')
 
-# Read registers in parallel 
+# Read registers in parallel
 def get_registers_in_parallel():
-    
     with ThreadPoolExecutor(max_workers=10) as executor: # Limit to 10 threads | adjust as needed based on our infra
         executor.map(read_and_print_register, registers)
 
-
 if __name__ == "__main__":
-    while True:
-        get_registers_in_parallel()
 
-        # Sleep 2s before next polling
-        # time.sleep(2)
+    # comment out the while for 1 execution
+    while running:
+
+        start_time = time.time() 
+        get_registers_in_parallel()
+        end_time = time.time()
+
+        elapsed_time = end_time - start_time
+        logging.info(f"Time taken to read all registers: {elapsed_time:.2f} seconds")
+
+        # logging.info("Script has stopped.")

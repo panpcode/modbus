@@ -76,7 +76,11 @@ def read_and_print_registers():
 
 # Main read loop
 while True:
+    start_time = time.time() 
     read_and_print_registers()
-    
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    print(f"Time taken to read all registers: {elapsed_time:.2f} seconds")
+
     # Sleep 2s before next polling
     time.sleep(2)
