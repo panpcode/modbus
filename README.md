@@ -52,8 +52,11 @@ The scripts in this repository allow you to:
 
 ## Requirements
 
-- Python 3.7 or higher
-- `pyModbusTCP` library
+- Python 3.10 or higher
+- `pyModbusTCP` library. It can be installed through pip:
+  
+  ```bash
+  pip install pyModbusTCP
 
 ---
 
@@ -63,9 +66,9 @@ The scripts in this repository allow you to:
    ```bash
    git clone git@github.com:panpcode/modbus.git
    cd modbus
-   python3.10 modbus_multiple_clients.py
+   python modbus_multiple_clients.py
    # Example of usage with arguments
-   python3.10 modbus_multiple_clients.py --file registers.txt --clients 5 --continuous
+   python modbus_multiple_clients.py --file registers.txt --clients 5 --continuous
 
 
 ## Speed results
