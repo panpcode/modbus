@@ -6,15 +6,12 @@ This repository contains Python scripts for polling Modbus registers using the `
 
 ## Table of Contents
 - [Overview](#overview)
-- [Features](#features)
 - [Requirements](#requirements)
-- [Installation](#installation)
-- [Usage](#usage)
+- [Features](#features)
   - [modbustcp_read_satec4.py](#modbustcp_read_satec4py)
   - [modbustcp_multiple_clients.py](#modbustcp_multiple_clientspy)
-- [Configuration](#configuration)
-- [Examples](#examples)
-- [License](#license)
+- [Installation](#installation)
+- [SpeedResults](#speedresults)
 
 ---
 
@@ -25,6 +22,16 @@ The scripts in this repository allow you to:
 - Use multithreading to improve performance.
 - Use multiple Modbus clients to distribute the workload. The number of clients to be discussed with Konstantinos and the team.
 - Run the polling process either once or continuously. This need has to be discussed with Konstantinos and the team.
+
+---
+
+## Requirements
+
+- Python 3.10 or higher
+- `pyModbusTCP` library. It can be installed through pip:
+  
+  ```bash
+  pip install pyModbusTCP
 
 ---
 
@@ -50,16 +57,6 @@ The scripts in this repository allow you to:
 
 ---
 
-## Requirements
-
-- Python 3.10 or higher
-- `pyModbusTCP` library. It can be installed through pip:
-  
-  ```bash
-  pip install pyModbusTCP
-
----
-
 ## Installation
 
 1. Clone the repository:
@@ -71,7 +68,7 @@ The scripts in this repository allow you to:
    python modbustcp_multiple_clients.py --file registers.txt --clients 5 --continuous
 
 
-## Speed results
+## SpeedResults
 
 1. Script with single client
 
