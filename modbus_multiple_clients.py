@@ -37,7 +37,10 @@ def load_registers_from_file(file_path):
         sys.exit(1)
     return registers
 
-# Divide registers into chunks for multiple clients
+# as we want to read registers concurrently, we need to ivide them into chunks for different clients
+# this function will divide the list of registers into smaller lists
+# based on the number of clients (num_chunks = number of clients)
+# this will help us to read registers concurrently and avoid overloading a single client with too many registers
 def chunk_registers(registers, num_chunks):
     chunk_size = len(registers) // num_chunks
     chunks = [registers[i:i + chunk_size] for i in range(0, len(registers), chunk_size)]
@@ -78,6 +81,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run Modbus register polling.")
     parser.add_argument("--file", type=str, default="registers.txt", help="Path to the registers file.")
     parser.add_argument("--clients", type=int, default=5, help="Number of Modbus clients to use.")
+    # action="store_true": means that if arg is missing it will run once
     parser.add_argument("--continuous", action="store_true", help="Run the script continuously.")
     args = parser.parse_args()
 
@@ -96,6 +100,8 @@ if __name__ == "__main__":
     clients = []
     for i in range(num_clients):
         try:
+            # we can grab the IP address from the command line as well
+            # or from a config file where we can store different IP addresses for different loggers
             client = ModbusClient(host='10.126.254.195', port=502, unit_id=1, auto_open=True)
             clients.append(client)
             logging.info(f"Client {i + 1} initialized: Host={client.host}, Port={client.port}, Unit ID={client.unit_id}")
