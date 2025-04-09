@@ -41,10 +41,12 @@ The scripts in this repository allow you to:
 - Supports both one-time execution and continuous polling.
 - Configurable via command-line arguments.
 - 3 or 4 times faster than the rest of the scripts.
-- Arguments: 
-    --file: Path to the file containing register details (default is registers.txt).
-    --clients: Number of Modbus clients.
-    --continuous: If provided, the script will run continuously. Otherwise once.
+- Arguments:
+  ```bash
+  --file: Path to the file containing register details (default is registers.txt).
+  --clients: Number of Modbus clients.
+  --continuous: If provided, the script will run continuously. Otherwise once.
+  ```
 
 ---
 
@@ -70,6 +72,7 @@ The scripts in this repository allow you to:
 
 1. Script with single client
 
+    ```bash
     panpap@192 modbus % python3 modbustcp_read_satec4.py
     2025-04-09 17:04:56,043 - INFO - Time taken to read all registers: 3.85 seconds
     2025-04-09 17:04:59,416 - INFO - Time taken to read all registers: 3.37 seconds
@@ -80,9 +83,11 @@ The scripts in this repository allow you to:
     2025-04-09 17:05:16,913 - INFO - Time taken to read all registers: 3.46 seconds
     2025-04-09 17:05:20,389 - INFO - Time taken to read all registers: 3.48 seconds
 
+    Average time to provide output with a single client: 3.52 seconds
 
 2. Script with multiple clients
 
+    ```bash
     panpap@192 modbus % python3 modbus_multiple_clients.py --continuous
     2025-04-09 17:00:49,041 - INFO - Time taken to read all registers: 1.21 seconds
     2025-04-09 17:00:49,971 - INFO - Time taken to read all registers: 0.93 seconds
@@ -96,4 +101,7 @@ The scripts in this repository allow you to:
     ^C2025-04-09 17:00:57,256 - INFO - Terminating script...
     2025-04-09 17:00:57,692 - INFO - Time taken to read all registers: 0.97 seconds
     2025-04-09 17:00:57,692 - INFO - Script stopped and clients were closed.
+
+    Average time to provide output with multiple clients: 0.99 seconds
+
 
