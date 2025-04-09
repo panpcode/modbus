@@ -43,6 +43,7 @@ def load_registers_from_file(file_path):
 # this will help us to read registers concurrently and avoid overloading a single client with too many registers
 def chunk_registers(registers, num_chunks):
     chunk_size = len(registers) // num_chunks
+    # slicing the list into smaller sublists
     chunks = [registers[i:i + chunk_size] for i in range(0, len(registers), chunk_size)]
     
     if len(chunks) > num_chunks:

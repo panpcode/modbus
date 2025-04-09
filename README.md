@@ -1,6 +1,6 @@
 # Modbus Register Polling Scripts
 
-This repository contains Python scripts for polling Modbus registers using the `pyModbusTCP` library. The scripts are designed to handle Modbus communication efficiently, with options for multithreading (modbustcp_read_satec4.py) and multiple clients (modbus_multiple_clients.py).
+This repository contains Python scripts for polling Modbus registers using the `pyModbusTCP` library. The scripts are designed to handle Modbus communication efficiently, with options for multithreading (modbustcp_read_satec4.py) and multiple clients (modbustcp_multiple_clients.py).
 
 ---
 
@@ -11,7 +11,7 @@ This repository contains Python scripts for polling Modbus registers using the `
 - [Installation](#installation)
 - [Usage](#usage)
   - [modbustcp_read_satec4.py](#modbustcp_read_satec4py)
-  - [modbus_multiple_clients.py](#modbus_multiple_clientspy)
+  - [modbustcp_multiple_clients.py](#modbustcp_multiple_clientspy)
 - [Configuration](#configuration)
 - [Examples](#examples)
 - [License](#license)
@@ -35,7 +35,7 @@ The scripts in this repository allow you to:
 - Supports multithreading for parallel register reads.
 - No performance gains compared to the serial reading of `modbustcp_read_satec2.py` script.
 
-### `modbus_multiple_clients.py`
+### `modbustcp_multiple_clients.py`
 - Uses multiple Modbus clients to distribute the workload.
 - Divides registers into chunks, with each client handling a subset.
 - Supports both one-time execution and continuous polling.
@@ -66,9 +66,9 @@ The scripts in this repository allow you to:
    ```bash
    git clone git@github.com:panpcode/modbus.git
    cd modbus
-   python modbus_multiple_clients.py
+   python modbustcp_multiple_clients.py
    # Example of usage with arguments
-   python modbus_multiple_clients.py --file registers.txt --clients 5 --continuous
+   python modbustcp_multiple_clients.py --file registers.txt --clients 5 --continuous
 
 
 ## Speed results
@@ -91,7 +91,7 @@ The scripts in this repository allow you to:
 2. Script with multiple clients
 
     ```bash
-    panpap@192 modbus % python3 modbus_multiple_clients.py --continuous
+    panpap@192 modbus % python3 modbustcp_multiple_clients.py --continuous
     2025-04-09 17:00:49,041 - INFO - Time taken to read all registers: 1.21 seconds
     2025-04-09 17:00:49,971 - INFO - Time taken to read all registers: 0.93 seconds
     2025-04-09 17:00:50,913 - INFO - Time taken to read all registers: 0.94 seconds
