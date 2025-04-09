@@ -45,6 +45,9 @@ def chunk_registers(registers, num_chunks):
     chunk_size = len(registers) // num_chunks
     # slicing the list into smaller sublists
     chunks = [registers[i:i + chunk_size] for i in range(0, len(registers), chunk_size)]
+    # printing each new list with registers
+    # for i, chunk in enumerate(chunks):
+    #     logging.info(f"Chunk {i + 1}: {chunk}")
     
     if len(chunks) > num_chunks:
         chunks[-2].extend(chunks[-1])
