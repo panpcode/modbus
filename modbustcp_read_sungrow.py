@@ -4,7 +4,8 @@ import logging
 
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 
-client = SungrowInverter("10.126.77.168", timeout=10)
+# client = SungrowInverter("10.126.77.168", timeout=10)
+client = SungrowInverter("10.126.78.168", timeout=10)
 
 loop = asyncio.new_event_loop()
 asyncio.set_event_loop(loop)

@@ -1,0 +1,1 @@
+8002,Device type code,1,U16

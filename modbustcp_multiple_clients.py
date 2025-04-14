@@ -83,7 +83,7 @@ if __name__ == "__main__":
 
     # Parse command-line arguments
     parser = argparse.ArgumentParser(description="Run Modbus register polling.")
-    parser.add_argument("--file", type=str, default="registers.txt", help="Path to the registers file.")
+    parser.add_argument("--file", type=str, default="registers/satec-registers.txt", help="Path to the registers file.")
     parser.add_argument("--clients", type=int, default=5, help="Number of Modbus clients to use.")
     # action="store_true": means that if arg is missing it will run once
     parser.add_argument("--continuous", action="store_true", help="Run the script continuously.")
@@ -106,7 +106,12 @@ if __name__ == "__main__":
         try:
             # we can grab the IP address from the command line as well
             # or from a config file where we can store different IP addresses for different loggers
+
             client = ModbusClient(host='10.126.254.195', port=502, unit_id=1, auto_open=True)
+
+            # huawei = ModbusClient 10.126.77.168
+            # client = ModbusClient(host='10.100.30.140', port=502, unit_id=1, auto_open=True)
+            
             clients.append(client)
             logging.info(f"Client {i + 1} initialized: Host={client.host}, Port={client.port}, Unit ID={client.unit_id}")
         except Exception as e:
