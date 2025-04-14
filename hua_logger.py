@@ -14,7 +14,7 @@ client = ModbusClient(host=MODBUS_IP, port=MODBUS_PORT, unit_id=UNIT_ID, auto_op
 if client.open():
     value = client.read_holding_registers(REGISTER_ADDRESS, 1)
     if value:
-        logging.info(f"✅ SUCCESS - Unit ID {UNIT_ID}: Register {REGISTER_ADDRESS + 40001} value = {value[0]}")
+        logging.info(f"✅ SUCCESS - Unit ID {UNIT_ID}: Register {REGISTER_ADDRESS} value = {value[0]}")
     else:
         logging.info(f"❌ No response or error from Unit ID {UNIT_ID}")
     client.close()
