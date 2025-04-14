@@ -107,10 +107,9 @@ if __name__ == "__main__":
             # we can grab the IP address from the command line as well
             # or from a config file where we can store different IP addresses for different loggers
 
-            client = ModbusClient(host='10.126.254.195', port=502, unit_id=1, auto_open=True)
+            # client = ModbusClient(host='10.126.254.195', port=502, unit_id=1, auto_open=True)
+            client = ModbusClient(host='10.100.7.163', port=502, unit_id=1, auto_open=True)
 
-            # huawei = ModbusClient 10.126.77.168
-            # client = ModbusClient(host='10.100.30.140', port=502, unit_id=1, auto_open=True)
             
             clients.append(client)
             logging.info(f"Client {i + 1} initialized: Host={client.host}, Port={client.port}, Unit ID={client.unit_id}")
